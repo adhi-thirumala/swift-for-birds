@@ -8,8 +8,8 @@ import shutil
 
 #makesure is a number btw 1 and 100
 trainPercent = 80
-originalDir = "/media/adhi/Warzone & other Big Games/Swift Project Images/Chimney Swift"
-targetDir = "/media/adhi/Warzone & other Big Games/Swift Project Images/ting"
+originalDir = "/media/adhi/Warzone & other Big Games/Swift Project Images/madness"
+targetDir = "/media/adhi/Warzone & other Big Games/Swift Project Images/ting/dove2"
 
 
 def seperate(og, target):

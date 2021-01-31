@@ -17,9 +17,12 @@ from keras.layers import Activation, Dropout, Dense, Flatten
 import matplotlib.pyplot as plt
 import sys
 from PIL import Image
+import tensorflow as tf
 sys.modules['Image'] = Image
 
-
+config = tf.compat.v1.ConfigProto()
+config.gpu_options.per_process_gpu_memory_fraction = 0.7
+tf.compat.v1.keras.backend.set_session(tf.compat.v1.Session(config=config));
 # ### Image generators
 
 # #### The training dataset and the validation dataset should be in seperate folders. In each of the folders  there should be different sub-folders for each of the classes (individuals).  For example if training a model to classify 3 classes the directory of the training pictures should be:
@@ -55,7 +58,7 @@ train_data = ImageDataGenerator(
         rescale = 1./255)
 
 train_generator = train_data.flow_from_directory(
-        directory=r"/PATH/TO/Training_data_set
+        directory=r"/media/adhi/Warzone & other Big Games/Swift Project Images/ting/train/",
         target_size=(224, 224),
         batch_size=8,
         shuffle=True)
@@ -68,7 +71,7 @@ train_generator = train_data.flow_from_directory(
 val_data = ImageDataGenerator(rescale = 1./255)
                                  
 val_generator = val_data.flow_from_directory(
-        directory=r"/PATH/TO/Validation_data_set
+        directory=r"/media/adhi/Warzone & other Big Games/Swift Project Images/ting/val/",
         target_size=(224, 224),
         batch_size=8,
         shuffle=True)
@@ -87,9 +90,9 @@ x = Dropout(0.5)(x)
 x = Flatten()(x)
 x = Dense(256, activation='relu')(x)
 #add a dense layer with a value equal to the number of classes
-predictors = Dense(30, activation='softmax')(x)
+predictors = Dense(2, activation='softmax')(x)
 # Create the model
-vgg19model = Model(input=vgg19.input, output=predictors)
+vgg19model = Model(vgg19.input, predictors)
 
 
 # In[5]:
@@ -101,11 +104,14 @@ vgg19model.summary()
 
 # ### Model training
 
+
+
+
 # In[8]:
 
 
 # define where to save the model after each epoch
-filepath = "PATH/TO/Saved_model.h5"
+filepath = "../ASSETS/model.h5"
 # add a critera to save only if there was an improvement in the model comparing
 # to the previous epoch (in this caset the model is saved if there was a decrease in the loss value)
 checkpoint = ModelCheckpoint(filepath, monitor='val_loss', verbose=1, save_best_only=True, mode='min')
@@ -128,13 +134,12 @@ vgg19model.compile(loss='categorical_crossentropy',
 
 #train the model
 batch_size=8
-model_history=vgg19model.fit_generator(
+model_history=vgg19model.fit(
         train_generator,
-        steps_per_epoch=27000//batch_size,#number of pictures in training data set divided by the batch size
-        epochs=512,
+        steps_per_epoch=2000//batch_size,#number of pictures in training data set divided by the batch size
+        epochs=32,
         validation_data=val_generator,
-        validation_steps= 3000// batch_size,#number of pictures in validation data set divided by the batch size
-        callbacks=callbacks_list)
+        validation_steps=500 // batch_size)
 
 
 # #### After training the model it is possible to re-train the model with different hyperparamenters (e.g. different optimizer or learning rate) using the best trained model as a starting point. Simply, load the last saved model, compile it and start training again.
@@ -144,7 +149,7 @@ model_history=vgg19model.fit_generator(
 
 
 #load the model
-model=load_model("PATH/TO/Saved_model.h5")
+model=load_model("../ASSETS/model.h5")
 
 # Compile the model
 model.compile(loss='categorical_crossentropy',
@@ -154,10 +159,10 @@ model.compile(loss='categorical_crossentropy',
 batch_size=8
 model_history_2=model.fit_generator(
         train_generator,
-        steps_per_epoch=27000//batch_size,
+        steps_per_epoch=1837//batch_size,
         epochs=30,
         validation_data=val_generator,
-        validation_steps= 3000// batch_size,
+        validation_steps= 458// batch_size,
         callbacks=callbacks_list)
 
 
@@ -205,7 +210,7 @@ model=load_model("PATH/TO/Saved_model.h5")
 
 # In[17]:
 
-
+"""
 #load the testing images
 #As in the training and validation datasets, the testing pictures folder should be organized in
 #different sub-folders with the pictures of each individual in a different sub-folder.
@@ -237,5 +242,5 @@ for i in range(0,len(x_batch)):
     else:
         wrong_classification.append(i)
 #print the results
-print(len(right_classification)/(len(wrong_classification)+len(right_classification)))
+print(len(right_classification)/(len(wrong_classification)+len(right_classification)))"""
 
