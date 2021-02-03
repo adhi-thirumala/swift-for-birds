@@ -14,14 +14,20 @@ from keras.optimizers import Adam, SGD
 from keras.callbacks import ModelCheckpoint, Callback, EarlyStopping
 from keras.preprocessing.image import ImageDataGenerator
 from keras.layers import Activation, Dropout, Dense, Flatten
+<<<<<<< HEAD
 import matplotlib
 matplotlib.use('TkAgg')
+=======
+>>>>>>> 424ed8c7cd1e6e35177598d2aaafe0e150487c49
 import matplotlib.pyplot as plt
 import sys
 from PIL import Image
 import tensorflow as tf
 <<<<<<< HEAD
+<<<<<<< HEAD
 import numpy as np
+=======
+>>>>>>> 424ed8c7cd1e6e35177598d2aaafe0e150487c49
 =======
 >>>>>>> 424ed8c7cd1e6e35177598d2aaafe0e150487c49
 sys.modules['Image'] = Image
@@ -115,6 +121,7 @@ vgg19model.summary()
 
 # In[8]:
 
+<<<<<<< HEAD
 vgg19model.compile(loss='categorical_crossentropy',
               optimizer=Adam(lr=1e-5),#define the optimizer and the learning rate
               metrics=['acc'])
@@ -137,12 +144,29 @@ model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
 # stop training if there is no improvement in model for 10 consecutives epochs.
 early_stopping_monitor = EarlyStopping(patience=3)
 callbacks_list = [model_checkpoint_callback, early_stopping_monitor]
+=======
+
+# define where to save the model after each epoch
+filepath = "../ASSETS/model.h5"
+# add a critera to save only if there was an improvement in the model comparing
+# to the previous epoch (in this caset the model is saved if there was a decrease in the loss value)
+checkpoint = ModelCheckpoint(filepath, monitor='val_loss', verbose=1, save_best_only=True, mode='min')
+# stop training if there is no improvement in model for 3 consecutives epochs.
+early_stopping_monitor = EarlyStopping(patience=10)
+callbacks_list = [checkpoint, early_stopping_monitor]
+>>>>>>> 424ed8c7cd1e6e35177598d2aaafe0e150487c49
 
 
 # In[9]:
 
 
 # Compile the model
+<<<<<<< HEAD
+=======
+vgg19model.compile(loss='categorical_crossentropy',
+              optimizer=Adam(lr=1e-5),#define the optimizer and the learning rate
+              metrics=['acc'])
+>>>>>>> 424ed8c7cd1e6e35177598d2aaafe0e150487c49
 
 
 # In[9]:
@@ -152,6 +176,7 @@ callbacks_list = [model_checkpoint_callback, early_stopping_monitor]
 batch_size=8
 model_history=vgg19model.fit(
 <<<<<<< HEAD
+<<<<<<< HEAD
         train_generator, steps_per_epoch=3970 // batch_size,#number of pictures in training data set divided by the batch size
         epochs=64,
         validation_data=val_generator,
@@ -159,11 +184,16 @@ model_history=vgg19model.fit(
         callbacks=[model_checkpoint_callback],
         verbose = 1)
 =======
+=======
+>>>>>>> 424ed8c7cd1e6e35177598d2aaafe0e150487c49
         train_generator,
         steps_per_epoch=2000//batch_size,#number of pictures in training data set divided by the batch size
         epochs=32,
         validation_data=val_generator,
         validation_steps=500 // batch_size)
+<<<<<<< HEAD
+>>>>>>> 424ed8c7cd1e6e35177598d2aaafe0e150487c49
+=======
 >>>>>>> 424ed8c7cd1e6e35177598d2aaafe0e150487c49
 
 
@@ -175,8 +205,12 @@ model_history=vgg19model.fit(
 
 #load the model
 <<<<<<< HEAD
+<<<<<<< HEAD
 model = Model(vgg19.input, predictors)
 model.load_weights(cfilepath)
+=======
+model=load_model("../ASSETS/model.h5")
+>>>>>>> 424ed8c7cd1e6e35177598d2aaafe0e150487c49
 =======
 model=load_model("../ASSETS/model.h5")
 >>>>>>> 424ed8c7cd1e6e35177598d2aaafe0e150487c49
@@ -190,15 +224,21 @@ batch_size=8
 model_history_2=model.fit_generator(
         train_generator,
 <<<<<<< HEAD
+<<<<<<< HEAD
         steps_per_epoch=3970//batch_size,
         epochs=16,
         validation_data=val_generator,
         validation_steps= 494// batch_size,
 =======
+=======
+>>>>>>> 424ed8c7cd1e6e35177598d2aaafe0e150487c49
         steps_per_epoch=1837//batch_size,
         epochs=30,
         validation_data=val_generator,
         validation_steps= 458// batch_size,
+<<<<<<< HEAD
+>>>>>>> 424ed8c7cd1e6e35177598d2aaafe0e150487c49
+=======
 >>>>>>> 424ed8c7cd1e6e35177598d2aaafe0e150487c49
         callbacks=callbacks_list)
 
@@ -216,8 +256,13 @@ rows = 1
 #plot loss
 #the accuracy and loss are stored in the "model_history"
 fig.add_subplot(rows, columns, 1)
+<<<<<<< HEAD
 plt.plot(model_history_2.history['loss']) #merge the loss from the two training steps
 plt.plot(model_history_2.history['val_loss'])
+=======
+plt.plot(model_history.history['loss']+ model_history_2.history['loss']) #merge the loss from the two training steps
+plt.plot(model_history.history['val_loss']+ model_history_2.history['val_loss'])
+>>>>>>> 424ed8c7cd1e6e35177598d2aaafe0e150487c49
 plt.title('loss')
 plt.ylabel('loss')
 plt.xlabel('epoch')
@@ -225,13 +270,22 @@ plt.legend(['train', 'val'], loc='upper left')
 
 #plot accuracy
 fig.add_subplot(rows, columns, 2)
+<<<<<<< HEAD
 plt.plot(model_history_2.history['acc'])
 plt.plot(model_history_2.history['val_acc'])
+=======
+plt.plot(model_history.history['acc']+ model_history_2.history['acc'])
+plt.plot(model_history.history['val_acc']+ model_history_2.history['val_acc'])
+>>>>>>> 424ed8c7cd1e6e35177598d2aaafe0e150487c49
 plt.title('accuracy')
 plt.ylabel('accuracy')
 plt.xlabel('epoch')
 plt.legend(['train', 'val'], loc='upper left')
+<<<<<<< HEAD
 plt.savefig('../ASSETS/line_plot.png')  
+=======
+plt.show()
+>>>>>>> 424ed8c7cd1e6e35177598d2aaafe0e150487c49
 
 
 # ### Model Generalization
@@ -242,8 +296,12 @@ plt.savefig('../ASSETS/line_plot.png')
 
 
 #load the best saved trained model
+<<<<<<< HEAD
 model = Model(vgg19.input, predictors)
 model.load_weights(cfilepath)
+=======
+model=load_model("PATH/TO/Saved_model.h5")
+>>>>>>> 424ed8c7cd1e6e35177598d2aaafe0e150487c49
 
 
 # In[17]:
@@ -256,7 +314,11 @@ model.load_weights(cfilepath)
 #even if there are no pictures for some individuals.
 val_sony_datagen1 = ImageDataGenerator(rescale = 1./255)
 val_sony_datagen = val_sony_datagen1.flow_from_directory(
+<<<<<<< HEAD
         directory=r"/media/adhi/Warzone & other Big Games/Swift Project Images/test/", #This folder should contain pictures of each bird in a different subfolder (similar to the training data set)
+=======
+        directory=r"/PATH/TO/Testing_images_folder", #This folder should contain pictures of each bird in a different subfolder (similar to the training data set)
+>>>>>>> 424ed8c7cd1e6e35177598d2aaafe0e150487c49
         target_size=(224, 224),
         batch_size=95,#number of images in the testing dataset
         shuffle=False)
@@ -272,7 +334,10 @@ wrong_classification=[]
 for i in range(0,len(x_batch)):
     image=np.expand_dims(x_batch[i], axis=0)
     result=model.predict(image)
+<<<<<<< HEAD
     print(result)
+=======
+>>>>>>> 424ed8c7cd1e6e35177598d2aaafe0e150487c49
     #if the predicted identity matches the real identity (from the y_batch) store the 
     #index of this pcitures in the right classification list. If different store it
     #in the wrong classification list

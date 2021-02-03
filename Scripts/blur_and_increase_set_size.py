@@ -62,16 +62,28 @@ def gblur(img, size):
 
 #load a test image to check the different transformations
 #plot after resizing to 224x224 (the image size used for training the VGG19)
+<<<<<<< HEAD
 """img =cv2.imread('E:\Swift Project Images\2796.Chimney Swift\2796.Chimney_Swift_0_-2_106_449_557_-_e_0376.jpg')
 fig=plt.figure(figsize=(5, 5))
 plt.imshow(cv2.cvtColor(cv2.resize(img, (224,224)), cv2.COLOR_BGR2RGB))
 plt.title("original")
 plt.show()"""
+=======
+img =cv2.imread('E:\Swift Project Images\2796.Chimney Swift\2796.Chimney_Swift_0_-2_106_449_557_-_e_0376.jpg')
+fig=plt.figure(figsize=(5, 5))
+plt.imshow(cv2.cvtColor(cv2.resize(img, (224,224)), cv2.COLOR_BGR2RGB))
+plt.title("original")
+plt.show()
+>>>>>>> 424ed8c7cd1e6e35177598d2aaafe0e150487c49
 
 
 # In[7]:
 
+<<<<<<< HEAD
 """
+=======
+
+>>>>>>> 424ed8c7cd1e6e35177598d2aaafe0e150487c49
 #plot the different transformations for comparison
 fig=plt.figure(figsize=(10, 10))
 columns = 2
@@ -98,21 +110,33 @@ imgnoise=gnoise(img,15,25).astype(np.uint8)
 plt.title("gaussian_noise")
 plt.imshow(cv2.cvtColor(cv2.resize(imgnoise, (224,224)), cv2.COLOR_BGR2RGB))
 
+<<<<<<< HEAD
 plt.show()"""
+=======
+plt.show()
+>>>>>>> 424ed8c7cd1e6e35177598d2aaafe0e150487c49
 
 
 # In[ ]:
 
 
 #directory containing the original dataset
+<<<<<<< HEAD
 dataset="/media/adhi/Warzone & other Big Games/Swift Project Images/madness"
+=======
+dataset="PATH/TO/ORIGINAL_DATASET"
+>>>>>>> 424ed8c7cd1e6e35177598d2aaafe0e150487c49
 #list all images in the original dataset
 imagePaths = sorted(list(paths.list_images(dataset)))
 
 #loop through all images to apply the transformations
 for imagePath in imagePaths:
     #define the output folder and add the name of the image file
+<<<<<<< HEAD
     directory_output="/media/adhi/Warzone & other Big Games/Swift Project Images/ting/dove2/"+imagePath.split(os.path.sep)[-1][:-4]
+=======
+    directory_output="PATH/TO/OUPUT_DATASET_FOLDER/"+imagePath.split(os.path.sep)[-1][:-4]
+>>>>>>> 424ed8c7cd1e6e35177598d2aaafe0e150487c49
     #load the image
     img =cv2.imread(imagePath)
     #apply the motion blur transformation
@@ -152,5 +176,8 @@ for imagePath in imagePaths:
             img=resizing(img, x, y ,1.5,2.5)
     #save the image after applying to different transformations
     cv2.imwrite(str(directory_output+"m"+".jpg"), img)
+<<<<<<< HEAD
     print(imagePath)
+=======
+>>>>>>> 424ed8c7cd1e6e35177598d2aaafe0e150487c49
 
