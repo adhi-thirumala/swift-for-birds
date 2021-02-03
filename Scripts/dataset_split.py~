@@ -1,0 +1,26 @@
+import os
+import random
+
+
+
+
+"""variables"""
+trainPercent = 0.8
+originalDir = ""
+targetDir = ""
+
+
+def seperate(og, target):
+    listOfFiles = os.listdir(og)
+    length = len(listOfFiles)
+    current = 0
+    os.mkdir(target + "/train"
+        for i in listOfFiles:
+
+
+
+
+
+
+
+
