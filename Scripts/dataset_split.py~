@@ -1,26 +1,3 @@
-import os
-import random
-
-
-
-
-"""variables"""
-trainPercent = 0.8
-originalDir = ""
-targetDir = ""
-
-
-def seperate(og, target):
-    listOfFiles = os.listdir(og)
-    length = len(listOfFiles)
-    current = 0
-    os.mkdir(target + "/train"
-        for i in listOfFiles:
-
-
-
-
-
-
-
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:a6744740f699a1a7761173c12069264a0bf9624d27330315565d3e964f35a1b2
+size 271

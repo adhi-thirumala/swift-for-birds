@@ -1,2 +1,3 @@
-# swift-for-birds
-This is the project that will be submitted by Adhitya Thirumala to PJAS, PRSEF, and potentially ISEF in the 2020-2021 academic year. To run the end product of this project for yourself, click Releases and download the files to the correct devices. Note that nothing is currently available.
+version https://git-lfs.github.com/spec/v1
+oid sha256:1bf4e9ace79daedcf321fd587a83ea0caa49abd3970deb77d82e89e297dce7e1
+size 308
