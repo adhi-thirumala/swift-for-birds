@@ -1,1 +1,3 @@
-This project intends to provide a fully automated system for the detection of chimney swifts. The releases tab should have all of the software that is necessary for the model to run on a Raspberry Pi.
+version https://git-lfs.github.com/spec/v1
+oid sha256:bd2318fd7254924fd687046fe89b09590736d0e0fc7ae2b91317be0c480b4123
+size 201
